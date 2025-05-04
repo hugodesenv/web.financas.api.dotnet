@@ -4,7 +4,12 @@ using System.Text;
 
 namespace api.aspnetcore.webfinancas.Application.UseCase.Account
 {
-    public class GenerateTokenUseCase
+    public interface IGenerateTokenUseCase
+    {
+        string execute();
+    }
+
+    public class GenerateTokenUseCase : IGenerateTokenUseCase
     {
         public string execute()
         {
