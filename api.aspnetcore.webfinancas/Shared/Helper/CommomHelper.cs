@@ -2,7 +2,7 @@
 {
     public static class CommomHelper
     {
-        public static object APIResponse(int pStatusCode, string pMessage, Dictionary<string, object>? pData)
+        public static object APIResponse(int pStatusCode, string pMessage, object? pData)
         {
             return new
             {

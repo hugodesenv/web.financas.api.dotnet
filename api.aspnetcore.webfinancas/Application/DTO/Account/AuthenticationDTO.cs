@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace api.aspnetcore.webfinancas.Application.DTO
+namespace api.aspnetcore.webfinancas.Application.DTO.Account
 {
     public class AuthenticationDTO
     {

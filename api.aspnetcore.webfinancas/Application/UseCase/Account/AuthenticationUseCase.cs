@@ -1,19 +1,19 @@
-﻿using api.aspnetcore.webfinancas.Application.DTO;
-using api.aspnetcore.webfinancas.Domain.Interface;
+﻿using api.aspnetcore.webfinancas.Application.DTO.Account;
+using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
 namespace api.aspnetcore.webfinancas.Application.UseCase.Account
 {
     public interface IAuthenticationUseCase
     {
-        Task<bool> execute(AuthenticationDTO pAccount);
+        Task<bool> Execute(AuthenticationDTO pAccount);
     }
 
     public class AuthenticationUseCase(IAccountRepository accountRepository) : IAuthenticationUseCase
     {
     
-        public async Task<bool> execute(AuthenticationDTO pAccount)
+        public async Task<bool> Execute(AuthenticationDTO pAccount)
         {
-            bool isAuthenticated = await accountRepository.auth(pAccount.username, pAccount.password);
+            bool isAuthenticated = await accountRepository.Auth(pAccount.username, pAccount.password);
             return isAuthenticated;
         }
     }

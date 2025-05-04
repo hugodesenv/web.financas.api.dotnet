@@ -1,5 +1,5 @@
-﻿using api.aspnetcore.webfinancas.Domain.Interface;
-using api.aspnetcore.webfinancas.Domain.Model;
+﻿using api.aspnetcore.webfinancas.Domain.Model;
+using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +15,19 @@ namespace api.aspnetcore.webfinancas.Controllers
         public PersonController(IPersonRepository personRepository) => this._personRepository = personRepository;
 
         [HttpGet]
-        public async Task<IActionResult> findAll() {
-            var list = await _personRepository.findAll();
+        public async Task<IActionResult> FindAll() {
+            var list = await _personRepository.FindAll();
             return Ok(list);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> findByID(int id)
+        public async Task<IActionResult> FindByID(int id)
         {
             if (id <= 0) {
                 return BadRequest("Field ID must be grather than zero.");
             }
 
-            Person? person = await _personRepository.findByID(id);
+            Person? person = await _personRepository.FindByID(id);
 
             if (person == null)
             {
@@ -38,14 +38,14 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> include(Person person)
+        public async Task<IActionResult> Insert(Person person)
         {
             if (person == null)
             {
                 return BadRequest();
             }
 
-            var newID = await _personRepository.insert(person);
+            var newID = await _personRepository.Insert(person);
 
             if (newID <= 0)
             {
@@ -56,7 +56,7 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> update(Person person)
+        public async Task<IActionResult> Update(Person person)
         {
             return Ok();
         }

@@ -1,6 +1,6 @@
 ﻿namespace api.aspnetcore.webfinancas.Infrastructure.Extension
 {
-    public static class CorExtension
+    public static class CorsExtension
     {
         public static IServiceCollection CorsInitializationExtension(this IServiceCollection services)
         {

@@ -1,6 +1,6 @@
-using api.aspnetcore.webfinancas.Domain.Interface;
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Infrastructure.Extension;
+using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using api.aspnetcore.webfinancas.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,8 @@ builder.Services
     .CorsInitializationExtension()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
-    .AccountExtensionDeclaration()
+    .AuthConfigExtension()
+    .ScopedDeclarationExtension()
     .AddDbContext<DatabaseContext>(options => options.UseNpgsql(
         builder.Configuration.GetConnectionString("DatabaseFinancas"))
 );

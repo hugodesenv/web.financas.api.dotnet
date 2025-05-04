@@ -1,23 +1,16 @@
-﻿using api.aspnetcore.webfinancas.Domain.Interface;
-using api.aspnetcore.webfinancas.Domain.Model;
+﻿using api.aspnetcore.webfinancas.Domain.Model;
+using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.aspnetcore.webfinancas.Infrastructure.Repository
 {
-    public class AccountRepository : IAccountRepository
+    public class AccountRepository(DatabaseContext database) : IAccountRepository
     {
-        private readonly DatabaseContext _database;
-
-        public AccountRepository(DatabaseContext database)
-        {
-            _database = database;
-        }
-
-        public async Task<bool> auth(string username, string password)
+        public async Task<bool> Auth(string username, string password)
         {
            try
             {
-                Account? account = await _database.Accounts.Where(acc => acc.username == username && acc.password == password && acc.active == true).FirstAsync();
+                Account? account = await database.Accounts.Where(acc => acc.username == username && acc.password == password && acc.active == true).FirstAsync();
                 return account != null;
             }
             catch (Exception e)
@@ -26,10 +19,10 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> save(Account account)
+        public async Task<bool> Save(Account account)
         {
-            _database.Accounts.Add(account);
-            int rowsAffected = await _database.SaveChangesAsync();
+            database.Accounts.Add(account);
+            int rowsAffected = await database.SaveChangesAsync();
 
             return rowsAffected > 0;
         }
