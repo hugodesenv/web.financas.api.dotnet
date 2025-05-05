@@ -1,7 +1,5 @@
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Infrastructure.Extension;
-using api.aspnetcore.webfinancas.Infrastructure.Interface;
-using api.aspnetcore.webfinancas.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +14,6 @@ builder.Services
     .AddDbContext<DatabaseContext>(options => options.UseNpgsql(
         builder.Configuration.GetConnectionString("DatabaseFinancas"))
 );
-
-// Injections
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 var app = builder.Build();
 

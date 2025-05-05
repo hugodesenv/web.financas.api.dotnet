@@ -16,5 +16,11 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Repository
 
             return purposes;
         }
+
+        public async Task<Purpose?> FindByID(int id)
+        {
+            Purpose? purpose = await database.Purpose.Where(x => x.id == id).FirstAsync();
+            return purpose;
+        }
     }
 }
