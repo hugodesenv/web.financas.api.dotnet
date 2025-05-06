@@ -22,5 +22,13 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Repository
             Purpose? purpose = await database.Purpose.Where(x => x.id == id).FirstAsync();
             return purpose;
         }
+
+        public async Task<bool> Insert(Purpose purpose)
+        {
+            await database.Purpose.AddAsync(purpose);
+            int rowsAffected = await database.SaveChangesAsync();
+
+            return rowsAffected > 0;    
+        }
     }
 }

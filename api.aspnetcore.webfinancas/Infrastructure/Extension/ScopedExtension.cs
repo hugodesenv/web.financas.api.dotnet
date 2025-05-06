@@ -16,7 +16,8 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Extension
                 .AddScoped<IPurposeRepository, PurposeRepository>()
                 .AddScoped<IPersonRepository, PersonRepository>()
                 .AddScoped<IPurposeFindAllUseCase, PurposeFindAllUseCase>()
-                .AddScoped<IPurposeFindByID, PurposeFindByID>();
+                .AddScoped<IPurposeFindByIDUseCase, PurposeFindByID>()
+                .AddScoped<IPurposeInsertUseCase, InsertPurposeUseCase>();
             
             return services;
         }
