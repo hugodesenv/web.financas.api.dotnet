@@ -1,5 +1,6 @@
-﻿using api.aspnetcore.webfinancas.Domain.Model;
-using api.aspnetcore.webfinancas.Infrastructure.Interface;
+﻿using api.aspnetcore.webfinancas.Application.UseCase.Person;
+using api.aspnetcore.webfinancas.Domain.Model;
+using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,57 +9,50 @@ namespace api.aspnetcore.webfinancas.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]")]
-    public class PersonController : ControllerBase
+    public class PersonController(
+        IFindAllPersonUseCase findAllPersonUse, 
+        IFindPersonByIDUseCase findByIDUse, 
+        IInsertPersonUseCase insertUse, 
+        IDeletePersonUseCase deletePersonUse
+    ) : ControllerBase
     {
-        private readonly IPersonRepository _personRepository;
-
-        public PersonController(IPersonRepository personRepository) => this._personRepository = personRepository;
-
         [HttpGet]
         public async Task<IActionResult> FindAll() {
-            var list = await _personRepository.FindAll();
-            return Ok(list);
+            var people = await findAllPersonUse.Execute();
+            return Ok(CommomHelper.APIResponse(200, "Person list", people));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> FindByID(int id)
         {
-            if (id <= 0) {
-                return BadRequest("Field ID must be grather than zero.");
-            }
+            Person? person = await findByIDUse.Execute(id);
 
-            Person? person = await _personRepository.FindByID(id);
-
-            if (person == null)
-            {
-                return NotFound("Person not found!");
-            }
-
-            return Ok(person);
+            return person == null
+                ? NotFound(CommomHelper.APIResponse(404, "Person not found", null))
+                : Ok(CommomHelper.APIResponse(200, "Person by ID", person));
         }
 
         [HttpPost]
         public async Task<IActionResult> Insert(Person person)
         {
-            if (person == null)
-            {
-                return BadRequest();
-            }
-
-            var newID = await _personRepository.Insert(person);
-
-            if (newID <= 0)
-            {
-                return BadRequest("Operation aborted!");
-            }
-
-            return Ok("Operation concluded!");
+            bool inserted = await insertUse.Execute(person);
+            return inserted
+                ? Ok(CommomHelper.APIResponse(200, "Operation concluded", null))
+                : BadRequest(CommomHelper.APIResponse(400, "Fail to insert person", null));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(Person person)
         {
             return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool deleted = await deletePersonUse.Execute(id);
+
+            return Ok(CommomHelper.APIResponse(200, "Deleted", null));
         }
     }
 }

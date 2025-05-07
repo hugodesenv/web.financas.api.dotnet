@@ -6,6 +6,14 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Repository
 {
     public class PersonRepository(DatabaseContext database) : IPersonRepository
     {
+        public async Task<bool> Delete(Person person)
+        {
+            database.Person.Remove(person);
+            int rowsAffected = await database.SaveChangesAsync();
+                
+            return rowsAffected > 0;          
+        }
+
         public async Task<List<Person>> FindAll()
         {
             List<Person> people = await database.Person.ToListAsync();

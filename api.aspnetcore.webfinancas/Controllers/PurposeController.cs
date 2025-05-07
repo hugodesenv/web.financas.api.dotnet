@@ -9,13 +9,9 @@ namespace api.aspnetcore.webfinancas.Controllers
     [ApiController]
     [Authorize] 
     [Route("api/[controller]")]
-    public class PurposeController(
-        IPurposeFindAllUseCase findAllUseCase, 
-        IPurposeFindByIDUseCase findByID, 
-        IPurposeInsertUseCase insertUseCase
-    ) : ControllerBase
+    public class PurposeController(IPurposeFindAllUseCase findAllUseCase, IPurposeInsertUseCase insertUseCase) : ControllerBase
     {
-        [HttpGet("find-all")]
+        [HttpGet]
         public async Task<IActionResult> FindAll()
         {
             var purposes = await findAllUseCase.Execute();
@@ -23,15 +19,8 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert([FromQuery] Purpose purpose)
+        public async Task<IActionResult> Insert([FromBody] Purpose purpose)
         {
-            var purposeQuery = await findByID.Execute(purpose.id);
-
-            if (purposeQuery == null)
-            {
-                return NotFound("Purpose not found");
-            }
-
             bool saved = await insertUseCase.Execute(purpose);
 
             return saved

@@ -7,7 +7,6 @@ namespace api.aspnetcore.webfinancas.Domain.Model
     public class Purpose
     {
         [Key]
-        [Required]
         public int id { get; set; }
 
         [MaxLength(40)]

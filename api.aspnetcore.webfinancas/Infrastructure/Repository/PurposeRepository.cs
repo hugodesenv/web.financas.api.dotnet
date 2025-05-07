@@ -19,8 +19,15 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Repository
 
         public async Task<Purpose?> FindByID(int id)
         {
-            Purpose? purpose = await database.Purpose.Where(x => x.id == id).FirstAsync();
-            return purpose;
+            try
+            {
+                Purpose? purpose = await database.Purpose.Where(x => x.id == id).FirstAsync();
+                return purpose;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> Insert(Purpose purpose)

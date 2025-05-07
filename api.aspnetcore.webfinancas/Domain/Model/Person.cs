@@ -7,7 +7,6 @@ namespace api.aspnetcore.webfinancas.Domain.Model
     public class Person
     {
         [Key]
-        [Required]
         public int id { get; set; }
         
         [Required]

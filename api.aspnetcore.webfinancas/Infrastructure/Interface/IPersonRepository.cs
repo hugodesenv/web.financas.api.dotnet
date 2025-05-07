@@ -7,5 +7,6 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
         Task<List<Person>> FindAll();
         Task<Person?> FindByID(int id);
         Task<int> Insert(Person person);
+        Task<bool> Delete(Person person);
     }
 }
