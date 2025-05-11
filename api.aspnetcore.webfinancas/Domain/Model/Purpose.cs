@@ -11,5 +11,10 @@ namespace api.aspnetcore.webfinancas.Domain.Model
 
         [MaxLength(40)]
         public string description { get; set; }
+
+        public static implicit operator bool(Purpose? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

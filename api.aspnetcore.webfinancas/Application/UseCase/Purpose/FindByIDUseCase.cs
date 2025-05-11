@@ -13,9 +13,7 @@ namespace api.aspnetcore.webfinancas.Application.UseCase.Purpose
     {
         async Task<Domain.Model.Purpose?> IPurposeFindByIDUseCase.Execute(int id)
         {
-            Console.Write("before");
             var purpose = await purposeRepository.FindByID(id);
-            Console.Write("After");
             return purpose;
         }
     }
