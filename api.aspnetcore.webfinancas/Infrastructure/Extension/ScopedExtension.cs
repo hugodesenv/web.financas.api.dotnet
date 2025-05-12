@@ -1,8 +1,8 @@
 ﻿using api.aspnetcore.webfinancas.Application.UseCase.Account;
 using api.aspnetcore.webfinancas.Application.UseCase.Person;
 using api.aspnetcore.webfinancas.Application.UseCase.Purpose;
+using api.aspnetcore.webfinancas.Domain.Repository;
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
-using api.aspnetcore.webfinancas.Infrastructure.Repository;
 
 namespace api.aspnetcore.webfinancas.Infrastructure.Extension
 {
@@ -22,7 +22,8 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Extension
                 .AddScoped<IFindAllPersonUseCase, FindAllPersonUseCase>()
                 .AddScoped<IFindPersonByIDUseCase, FindPersonByIDUseCase>()
                 .AddScoped<IInsertPersonUseCase, InsertPersonUseCase>()
-                .AddScoped<IDeletePersonUseCase, DeletePersonUseCase>();
+                .AddScoped<IDeletePersonUseCase, DeletePersonUseCase>()
+                .AddScoped<IUpdatePersonUseCase, UpdatePersonUseCase>();
             
             return services;
         }

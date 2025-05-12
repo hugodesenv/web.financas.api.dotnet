@@ -2,7 +2,7 @@
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.aspnetcore.webfinancas.Infrastructure.Repository
+namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class AccountRepository(DatabaseContext database) : IAccountRepository
     {

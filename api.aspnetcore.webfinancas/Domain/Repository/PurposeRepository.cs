@@ -3,7 +3,7 @@ using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.aspnetcore.webfinancas.Infrastructure.Repository
+namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class PurposeRepository(DatabaseContext database) : IPurposeRepository
     {

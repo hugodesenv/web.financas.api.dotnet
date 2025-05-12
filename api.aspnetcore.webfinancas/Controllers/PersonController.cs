@@ -1,4 +1,5 @@
-﻿using api.aspnetcore.webfinancas.Application.UseCase.Person;
+﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
+using api.aspnetcore.webfinancas.Application.UseCase.Person;
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,8 @@ namespace api.aspnetcore.webfinancas.Controllers
         IFindAllPersonUseCase findAllPersonUse, 
         IFindPersonByIDUseCase findByIDUse, 
         IInsertPersonUseCase insertUse, 
-        IDeletePersonUseCase deletePersonUse
+        IDeletePersonUseCase deletePersonUse,
+        IUpdatePersonUseCase updatePersonUse
     ) : ControllerBase
     {
         [HttpGet]
@@ -42,9 +44,20 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(Person person)
+        public async Task<IActionResult> Update([FromBody] PersonUpdateDTO person)
         {
-            return Ok();
+            try
+            {
+                bool updated = await updatePersonUse.Execute(person);
+
+                return updated
+                    ? Ok(CommomHelper.APIResponse(200, "Operation concluded", null))
+                    : BadRequest(CommomHelper.APIResponse(400, "Occurs an error when updating the person", null));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(CommomHelper.APIResponse(400, e.Message, null));
+            }
         }
 
         [HttpDelete]
