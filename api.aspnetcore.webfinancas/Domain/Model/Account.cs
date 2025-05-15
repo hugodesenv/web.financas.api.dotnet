@@ -13,7 +13,5 @@ namespace api.aspnetcore.webfinancas.Domain.Model
         [Required]
         public string password { get; set; }
         public bool active { get; set; }
-
-        public Account() { }
     }
 }

@@ -1,5 +1,4 @@
-﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
-using api.aspnetcore.webfinancas.Domain.Model;
+﻿using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +34,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
             return person.id;
         }
 
-        public async Task<bool> Update(PersonUpdateDTO person)
+        public async Task<bool> Update(Person person)
         {
             Person? _person = database.Person.FirstOrDefault(p => p.id == person.id);
 

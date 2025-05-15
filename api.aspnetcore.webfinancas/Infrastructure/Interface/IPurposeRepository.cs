@@ -8,5 +8,6 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
         Task<List<PurposeFindAllDTO>> FindAll();
         Task<Purpose?> FindByID(int id);
         Task<bool> Insert(Purpose purpose);
+        Task<bool> Update(PurposeUpdateDTO purpose, int id); 
     }
 }

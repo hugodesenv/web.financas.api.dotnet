@@ -1,5 +1,4 @@
-﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
-using api.aspnetcore.webfinancas.Domain.Model;
+﻿using api.aspnetcore.webfinancas.Domain.Model;
 
 namespace api.aspnetcore.webfinancas.Infrastructure.Interface
 {
@@ -9,6 +8,6 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
         Task<Person?> FindByID(int id);
         Task<int> Insert(Person person);
         Task<bool> Delete(Person person);
-        Task<bool> Update(PersonUpdateDTO person);
+        Task<bool> Update(Person person);
     }
 }

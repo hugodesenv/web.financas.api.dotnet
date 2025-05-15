@@ -5,13 +5,13 @@ namespace api.aspnetcore.webfinancas.Application.UseCase.Account
 {
     public interface IAuthenticationUseCase
     {
-        Task<bool> Execute(AuthenticationDTO pAccount);
+        Task<bool> Execute(AccountAuthenticationDTO pAccount);
     }
 
     public class AuthenticationUseCase(IAccountRepository accountRepository) : IAuthenticationUseCase
     {
     
-        public async Task<bool> Execute(AuthenticationDTO pAccount)
+        public async Task<bool> Execute(AccountAuthenticationDTO pAccount)
         {
             bool isAuthenticated = await accountRepository.Auth(pAccount.username, pAccount.password);
             return isAuthenticated;

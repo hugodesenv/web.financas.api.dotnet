@@ -7,14 +7,9 @@ namespace api.aspnetcore.webfinancas.Domain.Model
     public class Purpose
     {
         [Key]
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [MaxLength(40)]
         public string description { get; set; }
-
-        public static implicit operator bool(Purpose? v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

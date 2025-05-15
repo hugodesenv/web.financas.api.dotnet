@@ -1,4 +1,5 @@
-﻿using api.aspnetcore.webfinancas.Application.UseCase.Purpose;
+﻿using api.aspnetcore.webfinancas.Application.DTO.Purpose;
+using api.aspnetcore.webfinancas.Application.UseCase.Purpose;
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,12 @@ namespace api.aspnetcore.webfinancas.Controllers
     [ApiController]
     [Authorize] 
     [Route("api/[controller]")]
-    public class PurposeController(IPurposeFindAllUseCase findAllUseCase, IPurposeInsertUseCase insertUseCase, IPurposeFindByIDUseCase findByIDUseCase) : ControllerBase
+    public class PurposeController(
+        IPurposeFindAllUseCase findAllUseCase, 
+        IPurposeInsertUseCase insertUseCase, 
+        IPurposeFindByIDUseCase findByIDUseCase,
+        IPurposeUpdateUseCase updateUseCase
+     ) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> FindAll()
@@ -39,6 +45,16 @@ namespace api.aspnetcore.webfinancas.Controllers
             Purpose? purpose = await findByIDUseCase.Execute(id);
 
             return Ok(CommomHelper.APIResponse(200, "Purpose", purpose));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] PurposeUpdateDTO purpose, int id)
+        {
+            bool success = await updateUseCase.Execute(purpose, id);
+
+            return success
+                ? Ok(CommomHelper.APIResponse(200, "Purpose", purpose))
+                : BadRequest(CommomHelper.APIResponse(400, "Fail to update purpose", null));
         }
     }
 }

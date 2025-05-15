@@ -1,5 +1,4 @@
-﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
-using api.aspnetcore.webfinancas.Application.UseCase.Person;
+﻿using api.aspnetcore.webfinancas.Application.UseCase.Person;
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
@@ -44,7 +43,7 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] PersonUpdateDTO person)
+        public async Task<IActionResult> Update([FromBody] Person person)
         {
             try
             {

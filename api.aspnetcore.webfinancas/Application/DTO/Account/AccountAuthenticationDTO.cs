@@ -2,7 +2,7 @@
 
 namespace api.aspnetcore.webfinancas.Application.DTO.Account
 {
-    public class AuthenticationDTO
+    public class AccountAuthenticationDTO
     {
         [Required]
         public string username { get; set; }

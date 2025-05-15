@@ -10,7 +10,7 @@ namespace api.aspnetcore.webfinancas.Controllers
     public class AccountController(IGenerateTokenUseCase generateTokenUseCase, IAuthenticationUseCase authenticationUseCase) : ControllerBase
     {
         [HttpPost("token")]
-        public async Task<ActionResult> Authentication([FromBody] AuthenticationDTO account)
+        public async Task<ActionResult> Authentication([FromBody] AccountAuthenticationDTO account)
         {
             bool isAuthenticated = await authenticationUseCase.Execute(account);
 

@@ -10,7 +10,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
         public async Task<List<PurposeFindAllDTO>> FindAll()
         {
             var purposes = await database.Purpose.Select(x => new PurposeFindAllDTO() {
-                id = x.id,
+                id = x.id ?? 0,
                 description = x.description
             }).ToListAsync();
 
@@ -34,6 +34,23 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
         {
             await database.Purpose.AddAsync(purpose);
             int rowsAffected = await database.SaveChangesAsync();
+
+            return rowsAffected > 0;    
+        }
+
+        public async Task<bool> Update(PurposeUpdateDTO purpose, int id)
+        {
+            Purpose? _purpose = database.Purpose.FirstOrDefault(x => x.id == id);
+
+            if (_purpose == null)
+            {
+                throw new Exception("Purpose not found");
+            }
+
+            _purpose.description = purpose.description;
+            
+            database.Purpose.Update(_purpose);
+            int rowsAffected = database.SaveChanges();
 
             return rowsAffected > 0;    
         }

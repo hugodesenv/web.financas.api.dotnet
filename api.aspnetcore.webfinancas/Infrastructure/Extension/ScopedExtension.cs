@@ -23,7 +23,8 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Extension
                 .AddScoped<IFindPersonByIDUseCase, FindPersonByIDUseCase>()
                 .AddScoped<IInsertPersonUseCase, InsertPersonUseCase>()
                 .AddScoped<IDeletePersonUseCase, DeletePersonUseCase>()
-                .AddScoped<IUpdatePersonUseCase, UpdatePersonUseCase>();
+                .AddScoped<IUpdatePersonUseCase, UpdatePersonUseCase>()
+                .AddScoped<IPurposeUpdateUseCase, PurposeUpdateUseCase>();
             
             return services;
         }

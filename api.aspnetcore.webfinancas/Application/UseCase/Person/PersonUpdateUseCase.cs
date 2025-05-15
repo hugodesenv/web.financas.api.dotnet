@@ -1,16 +1,17 @@
-﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
-using api.aspnetcore.webfinancas.Infrastructure.Interface;
+﻿using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
 namespace api.aspnetcore.webfinancas.Application.UseCase.Person
 {
+    using api.aspnetcore.webfinancas.Domain.Model;
+
     public interface IUpdatePersonUseCase
     {
-        Task<bool> Execute(PersonUpdateDTO person);
+        Task<bool> Execute(Person person);
     }
 
     public class UpdatePersonUseCase(IPersonRepository personRepository) : IUpdatePersonUseCase
     {
-        public async Task<bool> Execute(PersonUpdateDTO person)
+        public async Task<bool> Execute(Person person)
         {
             if (person == null || person.id <= 0)
             {
