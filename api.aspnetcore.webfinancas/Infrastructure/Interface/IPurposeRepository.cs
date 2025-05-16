@@ -9,5 +9,6 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
         Task<Purpose?> FindByID(int id);
         Task<bool> Insert(Purpose purpose);
         Task<bool> Update(PurposeUpdateDTO purpose, int id); 
+        bool DeleteById(int id);
     }
 }

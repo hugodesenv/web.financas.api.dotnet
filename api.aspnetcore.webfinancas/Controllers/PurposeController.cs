@@ -14,7 +14,8 @@ namespace api.aspnetcore.webfinancas.Controllers
         IPurposeFindAllUseCase findAllUseCase, 
         IPurposeInsertUseCase insertUseCase, 
         IPurposeFindByIDUseCase findByIDUseCase,
-        IPurposeUpdateUseCase updateUseCase
+        IPurposeUpdateUseCase updateUseCase,
+        IPurposeDeleteByIDUseCase deleteByIDUseCase
      ) : ControllerBase
     {
         [HttpGet]
@@ -56,5 +57,17 @@ namespace api.aspnetcore.webfinancas.Controllers
                 ? Ok(CommomHelper.APIResponse(200, "Purpose", purpose))
                 : BadRequest(CommomHelper.APIResponse(400, "Fail to update purpose", null));
         }
+
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteByID(int id)
+        {
+            bool success = await deleteByIDUseCase.Execute(id);
+
+            return success
+                ? Ok(CommomHelper.APIResponse(200, "Purpose deleted", null))
+                : BadRequest(CommomHelper.APIResponse(400, "Fail to delete purpose", null));
+        }
     }
 }
+
+Tomorrow -> To use delete function in project.

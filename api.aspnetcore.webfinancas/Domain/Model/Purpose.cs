@@ -6,7 +6,7 @@ namespace api.aspnetcore.webfinancas.Domain.Model
     [Table("purpose")]
     public class Purpose
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? id { get; set; }
 
         [MaxLength(40)]

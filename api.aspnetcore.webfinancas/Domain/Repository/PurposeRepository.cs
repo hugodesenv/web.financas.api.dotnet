@@ -7,6 +7,19 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class PurposeRepository(DatabaseContext database) : IPurposeRepository
     {
+        public bool DeleteById(int id)
+        {
+            var purpose = database.Purpose.SingleOrDefault(x => x.id == id);
+
+            if (purpose == null)
+                return false;
+
+            database.Purpose.Remove(purpose);
+
+            int iRowsAffected = database.SaveChanges();
+            return iRowsAffected > 0;
+        }
+
         public async Task<List<PurposeFindAllDTO>> FindAll()
         {
             var purposes = await database.Purpose.Select(x => new PurposeFindAllDTO() {
