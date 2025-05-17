@@ -58,7 +58,7 @@ namespace api.aspnetcore.webfinancas.Controllers
                 : BadRequest(CommomHelper.APIResponse(400, "Fail to update purpose", null));
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteByID(int id)
         {
             bool success = await deleteByIDUseCase.Execute(id);
@@ -69,5 +69,3 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
     }
 }
-
-Tomorrow -> To use delete function in project.
