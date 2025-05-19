@@ -12,7 +12,9 @@ namespace api.aspnetcore.webfinancas.Application.UseCase.Purpose
     {
         public async Task<List<PurposeFindAllDTO>> Execute()
         {
-            return await purposeRepository.FindAll();
+            List<PurposeFindAllDTO> purposes = await purposeRepository.FindAll();
+
+            return [.. purposes.OrderBy(p => p.id)];
         }
     }
 }

@@ -15,6 +15,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
             }
             catch (Exception e)
             {
+                Console.Write(e.Message);
                 return false;
             }
         }

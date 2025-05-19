@@ -3,19 +3,17 @@
 namespace api.aspnetcore.webfinancas.Application.UseCase.Purpose
 {
     using api.aspnetcore.webfinancas.Application.DTO.Purpose;
-    using api.aspnetcore.webfinancas.Domain.Model;
 
     public interface IPurposeUpdateUseCase
     {
-        Task<bool> Execute(PurposeUpdateDTO purpose, int id);
+        bool Execute(PurposeUpdateDTO purpose);
     }
 
     public class PurposeUpdateUseCase(IPurposeRepository purposeRepository) : IPurposeUpdateUseCase
     {
-        public async Task<bool> Execute(PurposeUpdateDTO purpose, int id)
+        public bool Execute(PurposeUpdateDTO purpose)
         {
-            bool updated = await purposeRepository.Update(purpose, id);
-            return updated;
+            return purposeRepository.Update(purpose);
         }
     }
 }

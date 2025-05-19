@@ -49,9 +49,9 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] PurposeUpdateDTO purpose, int id)
+        public IActionResult Update([FromBody] PurposeUpdateDTO purpose)
         {
-            bool success = await updateUseCase.Execute(purpose, id);
+            bool success = updateUseCase.Execute(purpose);
 
             return success
                 ? Ok(CommomHelper.APIResponse(200, "Purpose", purpose))
