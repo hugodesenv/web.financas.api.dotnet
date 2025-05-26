@@ -1,8 +1,10 @@
-﻿using api.aspnetcore.webfinancas.Application.UseCase.Person;
+﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
+using api.aspnetcore.webfinancas.Application.UseCase.Person;
 using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace api.aspnetcore.webfinancas.Controllers
 {
@@ -43,7 +45,7 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Person person)
+        public async Task<IActionResult> Update(PersonUpdateDTO person)
         {
             try
             {
@@ -59,12 +61,14 @@ namespace api.aspnetcore.webfinancas.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deleted = await deletePersonUse.Execute(id);
 
-            return Ok(CommomHelper.APIResponse(200, "Deleted", null));
+            return deleted
+                ? Ok(CommomHelper.APIResponse(200, "Operation concluded", null))
+                : BadRequest(CommomHelper.APIResponse(400, "Occurs an error when deleting person", null));
         }
     }
 }

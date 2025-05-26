@@ -36,20 +36,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 
         public async Task<bool> Update(Person person)
         {
-            Person? _person = database.Person.FirstOrDefault(p => p.id == person.id);
-
-            if (_person == null)
-            {
-                throw new Exception("Person not found");
-            }
-
-            _person.name = person.name;
-            _person.is_client = person.is_client;
-            _person.is_employee = person.is_employee;
-            _person.is_customer = person.is_customer;
-            _person.active = person.active;
-
-            database.Person.Update(_person);
+            database.Person.Update(person);
 
             int rowsAffected = database.SaveChanges();
             

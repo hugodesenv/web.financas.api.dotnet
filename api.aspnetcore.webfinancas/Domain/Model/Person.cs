@@ -20,7 +20,7 @@ namespace api.aspnetcore.webfinancas.Domain.Model
 
         public bool is_client { get; set; }
 
-        public bool is_customer { get; set; }
+        public bool is_company { get; set; }
 
         public bool is_employee { get; set; }
     }

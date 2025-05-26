@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\DTO\Person\" />
     <Folder Include="Application\Service\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
