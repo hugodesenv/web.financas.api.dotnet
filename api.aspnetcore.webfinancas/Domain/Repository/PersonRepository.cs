@@ -17,7 +17,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
         public async Task<List<Person>> FindAll()
         {
             List<Person> people = await database.Person.ToListAsync();
-            return people;
+            return [.. people.OrderBy(p => p.id)];
         }
 
         public async Task<Person?> FindByID(int id)

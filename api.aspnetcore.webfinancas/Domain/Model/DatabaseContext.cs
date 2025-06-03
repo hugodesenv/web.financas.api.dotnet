@@ -7,5 +7,6 @@ namespace api.aspnetcore.webfinancas.Domain.Model
         public DbSet<Person> Person { get; set; } = null!;
         public DbSet<Account> Accounts { get; set; } = null!;   
         public DbSet<Purpose> Purpose { get; set; } = null!;
+        public DbSet<Entry> Entry { get; set; } = null!;  
     }
 }

@@ -4,7 +4,6 @@ using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Shared.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace api.aspnetcore.webfinancas.Controllers
 {
