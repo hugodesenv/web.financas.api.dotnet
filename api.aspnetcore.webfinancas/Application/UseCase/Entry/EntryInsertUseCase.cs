@@ -1,15 +1,21 @@
-﻿namespace api.aspnetcore.webfinancas.Application.UseCase.Entry
+﻿using api.aspnetcore.webfinancas.Application.DTO.Entry;
+using api.aspnetcore.webfinancas.Infrastructure.Interface;
+
+namespace api.aspnetcore.webfinancas.Application.UseCase.Entry
 {
     public interface IEntryUseCase
     {
-        Task<bool> Execute();
+        Task<bool> Execute(EntryInsertDTO entry);
     }
 
-    public class EntryInsertUseCase : IEntryUseCase
+    public class EntryInsertUseCase(IEntryRepository repository) : IEntryUseCase
     {
-        public Task<bool> Execute()
+        public async Task<bool> Execute(EntryInsertDTO entry)
         {
-            throw new NotImplementedException();
+            bool success = await repository.Insert(entry);
+            return success;
         }
     }
 }
+
+//ToDo: Tratar enumerado.
