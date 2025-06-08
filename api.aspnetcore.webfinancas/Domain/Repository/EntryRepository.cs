@@ -17,7 +17,7 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
                 observation = dto.observation,
                 mode = dto.mode
             };
-            
+
             database.Entry.Add(entry);
 
             int iRowAffected = await database.SaveChangesAsync();

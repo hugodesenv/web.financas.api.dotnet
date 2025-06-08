@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.aspnetcore.webfinancas.Controllers
 {
     [ApiController]
-    [Route("/[controller]")]
+    [Route("api/[controller]")]
     [Authorize]
     public class EntryController(IEntryUseCase entryUseCase) : ControllerBase
     {
