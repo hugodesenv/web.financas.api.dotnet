@@ -19,8 +19,8 @@ namespace api.aspnetcore.webfinancas.Controllers
     ) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> FindAll() {
-            var people = await findAllPersonUse.Execute();
+        public async Task<IActionResult> FindAll([FromQuery] PersonFindAllDTO filter) {
+            var people = await findAllPersonUse.Execute(filter);
             return Ok(CommomHelper.APIResponse(200, "Person list", people));
         }
 

@@ -1,4 +1,5 @@
-﻿using api.aspnetcore.webfinancas.Domain.Model;
+﻿using api.aspnetcore.webfinancas.Application.DTO.Person;
+using api.aspnetcore.webfinancas.Domain.Model;
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,21 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
             return rowsAffected > 0;          
         }
 
-        public async Task<List<Person>> FindAll()
+        public async Task<List<Person>> FindAll(PersonFindAllDTO filter)
         {
-            List<Person> people = await database.Person.ToListAsync();
+            // AsQueryable = Para não executar de imediato, por conta dos meus filtros dinamicos.
+            var query = database.Person.AsQueryable(); 
+
+            if (!string.IsNullOrWhiteSpace(filter.name)) {
+                query = query.Where(p => p.name.ToLower().Contains(filter.name.ToLower()));
+            }
+
+            if (filter.limit != null)
+            {
+                query = query.Take((int) filter.limit);
+            }
+
+            List<Person> people = await query.ToListAsync();
             return [.. people.OrderBy(p => p.id)];
         }
 
