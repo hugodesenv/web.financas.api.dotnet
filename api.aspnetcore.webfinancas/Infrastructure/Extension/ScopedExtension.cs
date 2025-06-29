@@ -1,4 +1,5 @@
 ﻿using api.aspnetcore.webfinancas.Application.UseCase.Account;
+using api.aspnetcore.webfinancas.Application.UseCase.BankAccount;
 using api.aspnetcore.webfinancas.Application.UseCase.Entry;
 using api.aspnetcore.webfinancas.Application.UseCase.Person;
 using api.aspnetcore.webfinancas.Application.UseCase.Purpose;
@@ -28,7 +29,10 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Extension
                 .AddScoped<IPurposeUpdateUseCase, PurposeUpdateUseCase>()
                 .AddScoped<IPurposeDeleteByIDUseCase, PurposeDeleteByIDUseCase>()
                 .AddScoped<IEntryUseCase, EntryInsertUseCase>()
-                .AddScoped<IEntryRepository, EntryRepository>();
+                .AddScoped<IEntryRepository, EntryRepository>()
+                .AddScoped<IBankAccountRepository, BankAccountRepository>()
+                .AddScoped<IBankAccountFindAllUseCase, BankAccountFindAllUseCase>()
+                .AddScoped<IBankAccountInsertUseCase, BankAccountInsertUseCase>();
             
             return services;
         }

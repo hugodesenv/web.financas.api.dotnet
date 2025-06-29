@@ -19,7 +19,7 @@ namespace api.aspnetcore.webfinancas.Application.UseCase.Account
             var token = new JwtSecurityToken(
                 issuer: "Hugo Souza",
                 audience: "Audience HG",
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddDays(3),
                 signingCredentials: creds
              );
 
