@@ -9,7 +9,10 @@ namespace api.aspnetcore.webfinancas.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class EntryController(IEntryUseCase entryUseCase) : ControllerBase
+    public class EntryController(
+        IEntryUseCase entryUseCase,
+        IEntryFindAllUseCase entryFindAll
+    ) : ControllerBase
     {
 
         [HttpPost]
@@ -20,6 +23,13 @@ namespace api.aspnetcore.webfinancas.Controllers
             return inserted
                 ? Ok(CommomHelper.APIResponse(200, "Operation concluded", null))
                 : BadRequest(CommomHelper.APIResponse(400, "Insert fail", null));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FindAll()
+        {
+            var entries = await entryFindAll.Execute();
+            return Ok(CommomHelper.APIResponse(200, "List of entries", entries));
         }
     }
 }
