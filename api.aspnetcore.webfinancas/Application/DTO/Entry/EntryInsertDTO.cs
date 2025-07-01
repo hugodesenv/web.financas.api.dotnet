@@ -9,10 +9,14 @@
 
         public int purpose_id { get; set; }
 
+        public int bank_account_id { get; set; }
+
         public DateTime issue_date { get; set; }
 
         public String observation { get; set; }
         // Forecast or confirmed
         public String mode { get; set; }
+
+        public double total { get; set; }   
     }
 }

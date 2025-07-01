@@ -34,7 +34,9 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
                 issue_date = dto.issue_date,
                 purpose_id = dto.purpose_id,
                 observation = dto.observation,
-                mode = dto.mode
+                mode = dto.mode,
+                bank_account_id = dto.bank_account_id,
+                total = dto.total
             };
 
             database.Entry.Add(entry);

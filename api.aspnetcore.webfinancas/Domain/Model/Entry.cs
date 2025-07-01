@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace api.aspnetcore.webfinancas.Domain.Model
 {
@@ -12,9 +13,9 @@ namespace api.aspnetcore.webfinancas.Domain.Model
         // payable or receivable
         [Required]
         public String type { get; set; }
-        
+
         [Required]
-        public int person_id { get; set; } 
+        public int person_id { get; set; }
 
         [ForeignKey("person_id")]
         public Person person { get; set; }
@@ -29,10 +30,19 @@ namespace api.aspnetcore.webfinancas.Domain.Model
         [Column(TypeName = "date")]
         public DateTime issue_date { get; set; }
 
-        public String observation {  get; set; }
+        public String observation { get; set; }
 
         // Predicted or regular
         [Required]
         public String mode { get; set; }
+
+        [Required]
+        public int bank_account_id { get; set; }
+
+        [ForeignKey("bank_account_id")]
+        public BankAccount bankAccount { get; set; }
+
+        [NotNull]
+        public double total { get; set; }
     }
 }

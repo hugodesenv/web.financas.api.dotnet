@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20250519004326_InitialCreate.cs" />
+    <Compile Remove="Migrations\20250519004326_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20250526015018_FixingPersonType.cs" />
+    <Compile Remove="Migrations\20250526015018_FixingPersonType.Designer.cs" />
+    <Compile Remove="Migrations\20250603023048_EntryTable.cs" />
+    <Compile Remove="Migrations\20250603023048_EntryTable.Designer.cs" />
+    <Compile Remove="Migrations\20250608170559_ChangeIssueDateType.cs" />
+    <Compile Remove="Migrations\20250608170559_ChangeIssueDateType.Designer.cs" />
+    <Compile Remove="Migrations\20250629170544_AddBankAccountTable.cs" />
+    <Compile Remove="Migrations\20250629170544_AddBankAccountTable.Designer.cs" />
+    <Compile Remove="Migrations\20250701021839_AddForeignKeyEntryBankAccount.cs" />
+    <Compile Remove="Migrations\20250701021839_AddForeignKeyEntryBankAccount.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JWT" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
