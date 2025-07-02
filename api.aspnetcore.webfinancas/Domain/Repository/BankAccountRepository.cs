@@ -18,6 +18,17 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
             return banks;
         }
 
+        public async Task<BankAccountFindByIDDTO> FindByID(int id)
+        {
+            var bank = await database.BankAccount.Select(x => new BankAccountFindByIDDTO()
+            {
+                id = x.id,
+                description = x.description
+            }).FirstAsync();
+
+            return bank; 
+        }
+
         public async Task<bool> Insert(BankAccountInsertDTO dto)
         {
             await database.BankAccount.AddAsync(new BankAccount()

@@ -6,6 +6,7 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
     {
         Task<List<BankAccountFindAllDTO>> FindAll();
         Task<bool> Insert(BankAccountInsertDTO dto);
+        Task<BankAccountFindByIDDTO> FindByID(int id);
 
     }
 }

@@ -11,7 +11,8 @@ namespace api.aspnetcore.webfinancas.Controllers
     [Route("api/[controller]")]
     public class BankAccountController(
         IBankAccountFindAllUseCase findAllUseCase,
-        IBankAccountInsertUseCase insertUseCase
+        IBankAccountInsertUseCase insertUseCase,
+        IBankAccountFindByID findByID
     ) : ControllerBase
     {
         [HttpGet]
@@ -29,6 +30,16 @@ namespace api.aspnetcore.webfinancas.Controllers
             return bsuccess
                 ? Ok(CommomHelper.APIResponse(200, "Bank account inserted", null))
                 : BadRequest(CommomHelper.APIResponse(400, "Fail to insert bank account", null));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FindByID(int id)
+        {
+            BankAccountFindByIDDTO? bankAccount = await findByID.Execute(id);
+
+            return bankAccount == null
+                ? NotFound(CommomHelper.APIResponse(404, "Bank account not found", null))
+                : Ok(CommomHelper.APIResponse(200, "Bank account by ID", bankAccount));
         }
     }
 }

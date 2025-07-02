@@ -1,5 +1,4 @@
 ﻿using api.aspnetcore.webfinancas.Application.DTO.BankAccount;
-using api.aspnetcore.webfinancas.Application.DTO.Purpose;
 using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
 namespace api.aspnetcore.webfinancas.Application.UseCase.BankAccount
