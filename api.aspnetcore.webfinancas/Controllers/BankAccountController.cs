@@ -12,7 +12,8 @@ namespace api.aspnetcore.webfinancas.Controllers
     public class BankAccountController(
         IBankAccountFindAllUseCase findAllUseCase,
         IBankAccountInsertUseCase insertUseCase,
-        IBankAccountFindByID findByID
+        IBankAccountFindByIDUseCase findByID,
+        IBankAccountUpdateUseCase updateUseCase
     ) : ControllerBase
     {
         [HttpGet]
@@ -32,7 +33,7 @@ namespace api.aspnetcore.webfinancas.Controllers
                 : BadRequest(CommomHelper.APIResponse(400, "Fail to insert bank account", null));
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> FindByID(int id)
         {
             BankAccountFindByIDDTO? bankAccount = await findByID.Execute(id);
@@ -40,6 +41,16 @@ namespace api.aspnetcore.webfinancas.Controllers
             return bankAccount == null
                 ? NotFound(CommomHelper.APIResponse(404, "Bank account not found", null))
                 : Ok(CommomHelper.APIResponse(200, "Bank account by ID", bankAccount));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(BankAccountUpdateDTO dto)
+        {
+            var updated = await updateUseCase.Execute(dto);
+
+            return updated
+                ? Ok(CommomHelper.APIResponse(200, "Success", null))
+                : NotFound(CommomHelper.APIResponse(404, "Occurs an error to update bank account", null));
         }
     }
 }

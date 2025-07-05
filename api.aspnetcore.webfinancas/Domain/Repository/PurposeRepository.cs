@@ -55,9 +55,6 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
         {
             Purpose? _purpose = database.Purpose.FirstOrDefault(x => x.id == purpose.id) ?? throw new Exception("Purpose not found");
             _purpose.description = purpose.description;
-
-            database.Purpose.Update(_purpose);
-
             int rowsAffected = database.SaveChanges();
             return rowsAffected > 0;    
         }

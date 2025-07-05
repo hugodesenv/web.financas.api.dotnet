@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Application\DTO\BankAccount\BankAccountFindAllDTO - Copy.cs" />
     <Compile Remove="Migrations\20250519004326_InitialCreate.cs" />
     <Compile Remove="Migrations\20250519004326_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20250526015018_FixingPersonType.cs" />

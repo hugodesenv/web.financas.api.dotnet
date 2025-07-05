@@ -3,12 +3,12 @@
     using api.aspnetcore.webfinancas.Application.DTO.BankAccount;
     using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
-    public interface IBankAccountFindByID
+    public interface IBankAccountFindByIDUseCase
     {
         Task<BankAccountFindByIDDTO?> Execute(int id);
     }
 
-    public class BankAccountFindByID(IBankAccountRepository repository) : IBankAccountFindByID
+    public class BankAccountFindByIDUseCase(IBankAccountRepository repository) : IBankAccountFindByIDUseCase
     {
         public async Task<BankAccountFindByIDDTO?> Execute(int id)
         {

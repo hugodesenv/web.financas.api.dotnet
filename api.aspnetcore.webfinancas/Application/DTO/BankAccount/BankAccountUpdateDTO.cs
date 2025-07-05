@@ -2,7 +2,9 @@
 
 namespace api.aspnetcore.webfinancas.Application.DTO.BankAccount
 {
-    public class BankAccountInsertDTO : BankAccountUpInsertDTO
-    { 
+    public class BankAccountUpdateDTO : BankAccountUpInsertDTO
+    {
+        [Required]
+        public int id { get; set; }
     }
 }
