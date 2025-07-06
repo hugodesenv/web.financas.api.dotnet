@@ -12,14 +12,16 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
             var query = await database.Entry.Select(x => new EntryFindAllDTO()
             {
                 id = x.id,
-                issueDate = x.issue_date,
+                issue_date = x.issue_date,
+                type = x.type,
+                person_id = x.person_id,
+                person_name = x.person.name,
+                purpose_id = x.purpose_id,
+                purpose_description = x.purpose.description,
                 mode = x.mode,
-                observation = x.observation,
-                personID = x.person_id,
-                personName = x.person.name,
-                purposeDescription = x.purpose.description,
-                purposeID = x.purpose_id,
-                type = x.type
+                bank_account_id = x.bank_account_id,
+                bank_account_description = x.bankAccount.description,
+                total = x.total,
             }).ToListAsync();
 
             return query;

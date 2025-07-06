@@ -20,8 +20,6 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 
         public async Task<BankAccountFindByIDDTO> FindByID(int id)
         {
-            Console.Write("UASHDUHASUDHAUSD");
-            Console.Write(id);
             var bank = await database.BankAccount.Select(x => new BankAccountFindByIDDTO()
             {
                 id = x.id,
@@ -45,12 +43,12 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 
         public async Task<bool> Update(BankAccountUpdateDTO dto)
         {
-            var bank = await database.BankAccount.SingleAsync(x => x.id == dto.id);
-            bank.description = dto.description;
-    
-            int iRowAffected = await database.SaveChangesAsync();
-            
-            return iRowAffected > 0;
+            var rowAffected = await database.BankAccount
+                .Where(x => x.id == dto.id)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(b => b.description, dto.description));
+
+            return rowAffected > 0;
         }
     }
 }
