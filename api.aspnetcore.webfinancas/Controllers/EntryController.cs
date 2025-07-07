@@ -26,9 +26,9 @@ namespace api.aspnetcore.webfinancas.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> FindAll()
+        public async Task<IActionResult> FindAll([FromQuery] EntryFindAllRequestDTO request)
         {
-            var entries = await entryFindAll.Execute();
+            var entries = await entryFindAll.Execute(request);
             return Ok(CommomHelper.APIResponse(200, "List of entries", entries));
         }
     }

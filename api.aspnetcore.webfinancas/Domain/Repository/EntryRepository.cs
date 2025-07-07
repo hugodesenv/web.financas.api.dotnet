@@ -7,9 +7,9 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class EntryRepository(DatabaseContext database) : IEntryRepository
     {
-        public async Task<List<EntryFindAllDTO>> FindAll()
+        public async Task<List<EntryFindAllDTO>> FindAll(EntryFindAllRequestDTO param)
         {
-            var query = await database.Entry.Select(x => new EntryFindAllDTO()
+            var query = database.Entry.Select(x => new EntryFindAllDTO()
             {
                 id = x.id,
                 issue_date = x.issue_date,
@@ -22,9 +22,15 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
                 bank_account_id = x.bank_account_id,
                 bank_account_description = x.bankAccount.description,
                 total = x.total,
-            }).ToListAsync();
+            }).AsQueryable();
 
-            return query;
+            if (param.initial_issue_date.HasValue && param.final_issue_date.HasValue)
+            {
+                query = query.Where(x => x.issue_date >= param.initial_issue_date
+                    && x.issue_date <= param.final_issue_date);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<bool> Insert(EntryInsertDTO dto)

@@ -24,4 +24,11 @@
 
         public double total {  get; set; }
     }
+
+    public class EntryFindAllRequestDTO
+    {
+        public DateTime? initial_issue_date {  get; set; }
+
+        public DateTime? final_issue_date { get; set; }
+    }
 }

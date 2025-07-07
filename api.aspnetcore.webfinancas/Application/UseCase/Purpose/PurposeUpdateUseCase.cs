@@ -1,8 +1,7 @@
-﻿using api.aspnetcore.webfinancas.Infrastructure.Interface;
-
-namespace api.aspnetcore.webfinancas.Application.UseCase.Purpose
+﻿namespace api.aspnetcore.webfinancas.Application.UseCase.Purpose
 {
     using api.aspnetcore.webfinancas.Application.DTO.Purpose;
+    using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
     public interface IPurposeUpdateUseCase
     {

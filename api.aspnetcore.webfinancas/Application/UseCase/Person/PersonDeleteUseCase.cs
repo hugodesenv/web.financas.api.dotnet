@@ -1,8 +1,7 @@
-﻿using api.aspnetcore.webfinancas.Infrastructure.Interface;
-
-namespace api.aspnetcore.webfinancas.Application.UseCase.Person
+﻿namespace api.aspnetcore.webfinancas.Application.UseCase.Person
 {
     using api.aspnetcore.webfinancas.Domain.Model;
+    using api.aspnetcore.webfinancas.Infrastructure.Interface;
 
     public interface IDeletePersonUseCase
     {

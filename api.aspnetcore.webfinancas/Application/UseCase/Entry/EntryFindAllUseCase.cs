@@ -5,14 +5,14 @@
 
     public interface IEntryFindAllUseCase
     {
-        Task<List<EntryFindAllDTO>> Execute();
+        Task<List<EntryFindAllDTO>> Execute(EntryFindAllRequestDTO param);
     }
 
     public class EntryFindAllUseCase(IEntryRepository repository) : IEntryFindAllUseCase
     {
-        public async Task<List<EntryFindAllDTO>> Execute()
+        public async Task<List<EntryFindAllDTO>> Execute(EntryFindAllRequestDTO param)
         {
-            return await repository.FindAll();
+            return await repository.FindAll(param);
         }
     }
 }
