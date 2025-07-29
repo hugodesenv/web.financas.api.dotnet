@@ -13,7 +13,8 @@ namespace api.aspnetcore.webfinancas.Controllers
         IBankAccountFindAllUseCase findAllUseCase,
         IBankAccountInsertUseCase insertUseCase,
         IBankAccountFindByIDUseCase findByID,
-        IBankAccountUpdateUseCase updateUseCase
+        IBankAccountUpdateUseCase updateUseCase,
+        IBankAccountDeleteUseCase deleteUseCase
     ) : ControllerBase
     {
         [HttpGet]
@@ -51,6 +52,16 @@ namespace api.aspnetcore.webfinancas.Controllers
             return updated
                 ? Ok(CommomHelper.APIResponse(200, "Success", null))
                 : NotFound(CommomHelper.APIResponse(404, "Occurs an error to update bank account", null));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool success = await deleteUseCase.Execute(id);
+
+            return success
+                ? Ok(CommomHelper.APIResponse(200, "Success", null))
+                : NotFound(CommomHelper.APIResponse(404, "Bank account not found", null));
         }
     }
 }

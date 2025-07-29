@@ -8,6 +8,7 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Interface
         Task<bool> Insert(BankAccountInsertDTO dto);
         Task<BankAccountFindByIDDTO> FindByID(int id);
         Task<bool> Update(BankAccountUpdateDTO dto);
+        Task<bool> Delete(int id);
 
     }
 }

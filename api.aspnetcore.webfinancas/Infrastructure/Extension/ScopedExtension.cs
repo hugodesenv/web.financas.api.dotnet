@@ -36,7 +36,8 @@ namespace api.aspnetcore.webfinancas.Infrastructure.Extension
                 .AddScoped<IEntryFindAllUseCase, EntryFindAllUseCase>()
                 .AddScoped<IBankAccountFindByIDUseCase, BankAccountFindByIDUseCase>()
                 .AddScoped<IBankAccountUpdateUseCase, BankAccountUpdateUseCase>()
-                .AddScoped<IEntryDeleteUseCase, EntryDeleteUseCase>();
+                .AddScoped<IEntryDeleteUseCase, EntryDeleteUseCase>()
+                .AddScoped<IBankAccountDeleteUseCase, BankAccountDeleteUseCase>();
             
             return services;
         }

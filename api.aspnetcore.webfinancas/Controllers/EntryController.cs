@@ -36,7 +36,6 @@ namespace api.aspnetcore.webfinancas.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            Console.WriteLine(id);
             bool deleted = await deleteUseCase.Execute(id);
 
             return deleted 

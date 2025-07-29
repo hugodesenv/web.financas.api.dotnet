@@ -7,6 +7,12 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class BankAccountRepository(DatabaseContext database) : IBankAccountRepository
     {
+        public async Task<bool> Delete(int id)
+        {
+            var res = await database.BankAccount.Where(p => p.id == id).ExecuteDeleteAsync();
+            return res > 0;
+        }
+
         public async Task<List<BankAccountFindAllDTO>> FindAll()
         {
             var banks = await database.BankAccount.Select(x => new BankAccountFindAllDTO()
