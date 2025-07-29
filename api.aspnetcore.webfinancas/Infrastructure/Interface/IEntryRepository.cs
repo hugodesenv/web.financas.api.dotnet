@@ -6,5 +6,6 @@
     {
         Task<bool> Insert(EntryInsertDTO dto);
         Task<List<EntryFindAllDTO>> FindAll(EntryFindAllRequestDTO param);
+        Task<bool> Delete(int id);
     }
 }

@@ -11,7 +11,8 @@ namespace api.aspnetcore.webfinancas.Controllers
     [Authorize]
     public class EntryController(
         IEntryUseCase entryUseCase,
-        IEntryFindAllUseCase entryFindAll
+        IEntryFindAllUseCase findAllUseCase,
+        IEntryDeleteUseCase deleteUseCase
     ) : ControllerBase
     {
 
@@ -28,8 +29,19 @@ namespace api.aspnetcore.webfinancas.Controllers
         [HttpGet]
         public async Task<IActionResult> FindAll([FromQuery] EntryFindAllRequestDTO request)
         {
-            var entries = await entryFindAll.Execute(request);
+            var entries = await findAllUseCase.Execute(request);
             return Ok(CommomHelper.APIResponse(200, "List of entries", entries));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Console.WriteLine(id);
+            bool deleted = await deleteUseCase.Execute(id);
+
+            return deleted 
+                ? Ok(CommomHelper.APIResponse(200, "Operation concluded", null))
+                : BadRequest(CommomHelper.APIResponse(404, "Entry not found", null));
         }
     }
 }

@@ -7,6 +7,12 @@ namespace api.aspnetcore.webfinancas.Domain.Repository
 {
     public class EntryRepository(DatabaseContext database) : IEntryRepository
     {
+        public async Task<bool> Delete(int id)
+        {
+            int rowAffected = await database.Entry.Where(p => p.id == id).ExecuteDeleteAsync();
+            return rowAffected > 0;
+        }
+
         public async Task<List<EntryFindAllDTO>> FindAll(EntryFindAllRequestDTO param)
         {
             var query = database.Entry.Select(x => new EntryFindAllDTO()
